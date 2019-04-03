@@ -7,7 +7,7 @@ KEY_RE_IMG      = "re_img"
 KEY_RE_IGNORE   = "re_ignore"
 KEY_REPLACEMENT = "replacement"
 
-RE_IMG      = "<img\s*(?<attrs>.*?)\s*/>"
+RE_IMG      = "<img\\s*(?<attrs>.*?)\\s*/>"
 RE_IGNORE   = "data-ignore"
 REPLACEMENT = "
   <hy-img %<attrs>s>
