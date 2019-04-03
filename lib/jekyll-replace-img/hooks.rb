@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 KEY_CONFIG = "replace_img"
-KEY_CONFIG_OLD = "replace_imgs"
 
 KEY_RE_IMG      = "re_img"
 KEY_RE_IGNORE   = "re_ignore"
@@ -19,8 +18,7 @@ RE_DATAURL = %r!src\s*=\s*[""]\s*data:!ix.freeze
 re_img, re_ignore, replacement = nil
 
 def get_config(config, key)
-  plugin_config = config[KEY_CONFIG] || config[KEY_CONFIG_OLD]
-  plugin_config && plugin_config[key]
+  config[KEY_CONFIG] && config[KEY_CONFIG][key]
 end
 
 Jekyll::Hooks.register(:site, :after_init) do |site|

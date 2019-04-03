@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require "nokogiri"
 require_relative "../lib/jekyll-replace-img"
 
 RSpec.configure do |config|
@@ -33,9 +34,11 @@ def fixture_site(fixture, overrides = {})
 end
 
 def page_by_path(site, path)
-  site.pages.find { |p| p.path == path }
+  page = site.pages.find { |p| p.path == path }
+  Nokogiri::HTML(page.output)
 end
 
 def doc_by_path(site, path)
-  site.documents.find { |p| p.relative_path == path }
+  doc = site.documents.find { |p| p.relative_path == path }
+  Nokogiri::HTML(doc.output)
 end
