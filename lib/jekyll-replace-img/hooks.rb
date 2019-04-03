@@ -6,11 +6,11 @@ KEY_RE_IMG      = "re_img"
 KEY_RE_IGNORE   = "re_ignore"
 KEY_REPLACEMENT = "replacement"
 
-RE_IMG      = "<img\\s*(?<attrs>.*?)\\s*/>"
+RE_IMG      = "<img\\s*(?<attributes>.*?)\\s*/>"
 RE_IGNORE   = "data-ignore"
 REPLACEMENT = "
-  <hy-img %<attrs>s>
-    <noscript><img data-ignore %<attrs>s/></noscript>
+  <hy-img %<attributes>s>
+    <noscript><img data-ignore %<attributes>s/></noscript>
   </hy-img>"
 
 RE_DATAURL = %r!src\s*=\s*[""]\s*data:!ix.freeze

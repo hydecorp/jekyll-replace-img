@@ -51,7 +51,7 @@ RSpec.describe JekyllReplaceImg do
     end
 
     context "custom replacement" do
-      let(:plugin_config) { { "replacement" => "<progressive-img %<attrs>s />" } }
+      let(:plugin_config) { { "replacement" => "<progressive-img %<attributes>s />" } }
 
       it "should replace images" do
         expect(page.css("progressive-img")[0]).not_to be_nil
