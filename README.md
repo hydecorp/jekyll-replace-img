@@ -1,6 +1,6 @@
 # Jekyll Replace `img`
 
-[![Build Status](https://travis-ci.org/benbalter/jekyll-relative-links.svg?branch=master)](https://travis-ci.org/benbalter/jekyll-relative-links)
+[![Build Status](https://travis-ci.org/qwtel/jekyll-replace-img.svg?branch=master)](https://travis-ci.org/qwtel/jekyll-replace-img)
 
 <!-- A Jekyll plugin to convert relative links to Markdown files to their rendered equivalents.
 
