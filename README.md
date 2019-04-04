@@ -56,7 +56,11 @@ replace_img:
 ```
 
 ### Image Regular Expression
-You can set the `re_img` key to a custom regular expression to look for image tags (or possibly other tags). Note that the capture groups need to be named and match the names in `replacement`. 
+You can set the `re_img` key to a custom regular expression to look for image tags (or possibly other tags). Note that the capture groups need to be named and match the names in `replacement`. E.g.:
+
+    <img\s*(?<attributes>.*?)\s*/>
+
+Mind the use of the non-greedy quantifier (`*?`) in the capture group to avoid capturing all images in a single match!
 
 You cannot provide flags and the regular expression is always case-insensitive.
 
