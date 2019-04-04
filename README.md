@@ -9,7 +9,7 @@ A Jekyll plugin to replace `img` tags with custom elements.
 
 It runs a regular expression to find HTML `img` tags against the output of each page and replaces matches with a user-defined replacement. 
 
-There are a number of custom elements you can use as replacement, such as [`progressive-img`][pi], [`amp-img`][ai] and (my very own) [`hy-img`][hy].
+There are a number of custom elements you can use, such as [`progressive-img`][pi], [`amp-img`][ai] and (my very own) [`hy-img`][hy].
 
 [io]: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 [pi]: https://www.webcomponents.org/element/progressive-img
@@ -21,7 +21,7 @@ Note that replacing images during site generation is necessary for lazy-loading,
 ## Why
 
 1. Lazy-loading images increases page load speed and is recommended by Google.
-2. So you can use the `![alt](src)` syntax for images without pulluting your posts with lengthy HTML tags.
+2. So you can use the `![alt](src)` syntax for images without polluting your posts with lengthy HTML tags.
 
 ## Usage
 
