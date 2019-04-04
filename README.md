@@ -47,7 +47,7 @@ You can configure this plugin in `_config.yml` under the `replace_img` key. The 
 
 ```yml
 replace_img:
-  re_img:      <img\\s*(?<attributes>.*?)\\s*/>
+  re_img:      <img\s*(?<attributes>.*?)\s*/>
   re_ignore:   data-ignore
   replacement: |
     <hy-img %<attributes>s>
