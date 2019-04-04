@@ -1,106 +1,85 @@
-# Jekyll Replace `img`
+# Jekyll Replace Image
 
 [![Build Status](https://travis-ci.org/qwtel/jekyll-replace-img.svg?branch=master)](https://travis-ci.org/qwtel/jekyll-replace-img)
 
-<!-- A Jekyll plugin to convert relative links to Markdown files to their rendered equivalents.
+A Jekyll plugin to replace `img` tags with custom elements.
+
 
 ## What it does
 
-Let's say you have a link like this in a Markdown file:
+It runs a regular expression to find HTML `img` tags against the output of each page and replaces matches with a user-defined replacement. 
 
-```
-[foo](bar.md)
-```
+There are a number of custom elements you can use as replacement, such as [`progressive-img`][pi], [`amp-img`][ai] and (my very own) [`hy-img`][hy].
 
-While that would render as a valid link on GitHub.com, it would not be a valid link on Pages. Instead, this plugin converts that link to:
+[io]: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+[pi]: https://www.webcomponents.org/element/progressive-img
+[ai]: https://www.ampproject.org/docs/reference/components/amp-img
+[hy]: https://github.com/qwtel/hy-img
 
-```
-[foo](bar.html)
-```
-
-It even work with pages with custom permalinks. If you have `bar.md` with the following:
-
-```
----
-permalink: /bar/
----
-
-# bar
-```
-
-Then `[foo](bar.md)` will render as `[foo](/bar/)`.
-
-The default Jekyll's configuration `permalink: pretty` in the `_config.yaml`
-file removes the `.html` extensions from the generated links.
+Note that replacing images during site generation is necessary for lazy-loading, because the browser will start loading any `img` tag as soon as it is parsed, before it can be touched by client side code.
 
 ## Why
 
-Because Markdown files rendered by GitHub Pages should behave similar to Markdown files rendered on GitHub.com
+1. Lazy-loading images increases page load speed and is recommended by Google.
+2. So you can use the `![alt](src)` syntax for images without pulluting your posts with lengthy HTML tags.
 
 ## Usage
 
-1. Add the following to your site's Gemfile:
+1.  Add the following to your site's Gemfile:
 
-  ```ruby
-  gem 'jekyll-relative-links'
-  ```
+    ```ruby
+    gem 'jekyll-replace-img'
+    ```
 
-2. Add the following to your site's config file:
+2.  Add the following to your site's config file:
 
-  ```yml
-  plugins:
-    - jekyll-relative-links
-  ```
-  Note: If you are using a Jekyll version less than 3.5.0, use the `gems` key instead of `plugins`.
+    ```yml
+    plugins:
+      - jekyll-replace-img
+    ```
+    Note: If you are using a Jekyll version less than 3.5.0, use the `gems` key instead of `plugins`.
+  
+3.  Configure and provide your replacement.
 
 ## Configuration
 
-You can configure this plugin in `_config.yml` under the `relative_links` key. This is optional and defaults to:
+You can configure this plugin in `_config.yml` under the `replace_img` key. The defaults are:
 
 ```yml
-relative_links:
-  enabled:     true
-  collections: false
+replace_img:
+  re_img:      <img\\s*(?<attributes>.*?)\\s*/>
+  re_ignore:   data-ignore
+  replacement: |
+    <hy-img %<attributes>s>
+      <noscript><img data-ignore %<attributes>s/></noscript>
+    </hy-img>"
 ```
 
-### Excluding files
+### Image Regular Expression
+You can set the `re_img` key to a custom regular expression to look for image tags (or possibly other tags). Note that the capture groups need to be named and match the names in `replacement`. 
 
-To exclude specific directories and/or files:
+You cannot provide flags and the regular expression is always case-insensitive.
 
-```yml
-relative_links:
-  exclude:
-    - directory
-    - file.md
-```
+### Ignore Regular Expression
+You can provide a custom regular expression on the `re_ignore` key that will run against the text matched by the `re_img` expression. If it matches, the image will not be replaced. 
 
-### Processing Collections
+You cannot provide flags and the regular expression is always case-insensitive. Data URLs are always ignored.
 
-Setting the `collections` option to `true` enables relative links from collection items (including posts).
+### Replacement
 
-Assuming this structure
+A replacement string for every sequence matched by `re_img` but not `re_ignore`. Has access to the named captures in `re_img`, which is `attributes` by default. 
 
-~~~
-├── _my_collection
-│   ├── some_doc.md
-│   └── some_subdir
-│       └── another_doc.md
-├── _config.yml
-└── index.md
-~~~
+Capture groups can be inserted in the replacement like this `%<attributes>s`, where `attribures` is the name of the capture group and `s` is the string tag. See Ruby's [`sprintf`][sprintf] documentation for more. 
 
-the following will work:
+[sprintf]: https://ruby-doc.org/core-2.6.2/Kernel.html#method-i-sprintf
 
-File | Link
--|-
-`index.md` | `[Some Doc](_my_collection/some_doc.md)`
-`index.md` | `[Another Doc](_my_collection/some_subdir/another_doc.md)`
-`_my_collection/some_doc.md` | `[Index](../index.md)`
-`_my_collection/some_doc.md` | `[Another Doc](some_subdir/another_doc.md)`
-`_my_collection/some_subdir/another_doc.md` | `[Index](../../index.md)`
-`_my_collection/some_subdir/another_doc.md` | `[Some Doc](../some_doc.md)`
+#### Example
+
+    <progressive-img %<attributes>s></progressive-img>
+    <noscript><img data-ignore %<attributes>s/></noscript>
 
 
-### Disabling
+## TODO
 
-Even if the plugin is enabled (e.g., via the `:jekyll_plugins` group in your Gemfile) you can disable it by setting the `enabled` key to `false`. -->
+- [ ] Allow multiple ignore expressions
+- [ ] Allow substitutions of matched groups, e.g. `s/width/w`
