@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/qwtel/jekyll-replace-img.svg?branch=master)](https://travis-ci.org/qwtel/jekyll-replace-img)
 
-A Jekyll plugin to replace `img` tags with custom elements.
+A Jekyll plugin to replace `img` tags with custom elements during site generation.
 
 
 ## What it does
