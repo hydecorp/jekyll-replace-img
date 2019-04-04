@@ -52,7 +52,7 @@ replace_img:
   replacement: |
     <hy-img %<attributes>s>
       <noscript><img data-ignore %<attributes>s/></noscript>
-    </hy-img>"
+    </hy-img>
 ```
 
 ### Image Regular Expression
