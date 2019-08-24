@@ -1,6 +1,6 @@
 # Jekyll Replace Image
 
-[![Build Status](https://travis-ci.org/qwtel/jekyll-replace-img.svg?branch=master)](https://travis-ci.org/qwtel/jekyll-replace-img)
+[![Build Status](https://travis-ci.org/hydecorp/jekyll-replace-img.svg?branch=master)](https://travis-ci.org/hydecorp/jekyll-replace-img)
 
 A Jekyll plugin to replace `img` tags with custom elements during site generation.
 
@@ -14,7 +14,7 @@ There are a number of custom elements you can use, such as [`progressive-img`][p
 [io]: https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
 [pi]: https://www.webcomponents.org/element/progressive-img
 [ai]: https://www.ampproject.org/docs/reference/components/amp-img
-[hy]: https://github.com/qwtel/hy-img
+[hy]: https://github.com/hydecorp/img
 
 Note that replacing images during site generation is necessary for lazy-loading, because the browser will start loading any `img` tag as soon as it is parsed, before it can be touched by client side code.
 
