@@ -6,3 +6,4 @@
 /.bundle
 /vendor
 *.gem
+.jekyll-cache
